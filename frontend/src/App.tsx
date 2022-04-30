@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css'
 
 import { MainRoutes } from './routes/MainRoutes'
+import { Header } from './components/Header'
 
 //import { useDispatch } from 'react-redux';
 //import { useAppSelector } from './redux/hooks/useAppSelector'
@@ -13,7 +14,7 @@ function App() {
   
   return (
     <div>
-      <h1>inicio</h1>
+      <Header />
       <MainRoutes />
     </div>
   );
