@@ -20,6 +20,19 @@ export const Logo = styled.div`
         font-size:60px; 
     }
 
+    a {
+        border: 0px;
+                background: none;
+                color: #D8E9A8;
+                font-size: 20px;
+                text-decoration: none;
+                cursor: pointer;
+                
+                &:hover {
+                    color: #82A284;
+                }   
+    }
+
 `;
 
 export const Nav = styled.nav`

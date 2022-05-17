@@ -32,7 +32,7 @@ export const SignIn = () => {
         }
         console.log(state.user.logged);
     }
-
+    console.log(state.user.logged);
     return (
         <Container>
             <C.SignIn>
@@ -67,7 +67,7 @@ export const SignIn = () => {
                             <button disabled={disabled} >Fazer Login</button>
                         </div>
                     </label>
-                    {state.user.name}
+                    User: {state.user.name}
                 </form>
             </C.SignIn>
         </Container>

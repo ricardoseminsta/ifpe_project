@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import './style'
 import { Container } from '../../components/MainComponents'
 import { ItemHome } from '../../components/ItemHome';
