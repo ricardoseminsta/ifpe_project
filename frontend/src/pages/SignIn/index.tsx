@@ -7,7 +7,8 @@ export const SignIn = () => {
     
     const {state, dispatch} = useContext(Context);
     
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState(state.user.name);
+    const [logged, setLogged] = useState(state.user.logged);
     const [password, setPassword] = useState('');
     const [disabled, setDisable] = useState(false);
 
@@ -16,27 +17,26 @@ export const SignIn = () => {
             dispatch({
                 type: 'CHANGE_AUTH',
                 payload: {
-                    logged: true
+                    logged: logged
                 }
             });
             dispatch({
                 type: 'CHANGE_NAME',
                 payload: {
-                    name: 'Ricardo'
+                    name: user
                 }
             });
             
             
         } else {
-
+            document.location.href = '/';
         }
-        console.log(state.user.logged);
     }
     console.log(state.user.logged);
     return (
         <Container>
             <C.SignIn>
-                <form onSubmit={handleSubmit}>
+                <form >
                     <label className="area">
                         <div className="area--title">Nome:</div>
                         <div className="area--input">
@@ -64,7 +64,7 @@ export const SignIn = () => {
                     <label className="area">
                         <div className="area--title"></div>
                         <div className="area--input">
-                            <button disabled={disabled} >Fazer Login</button>
+                            <button disabled={disabled} onClick={handleSubmit}>Fazer Login</button>
                         </div>
                     </label>
                     User: {state.user.name}
