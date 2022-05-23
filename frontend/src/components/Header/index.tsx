@@ -6,13 +6,11 @@ export const Header = () => {
     return (
         <Container>
             <C.Header>
-
                 <C.Logo>
                     <Link to="/">
                         <span>IF</span>
                         <p>CAFI</p>
                     </Link>
-                    
                 </C.Logo>
                 <C.Nav>
                     <ul>
