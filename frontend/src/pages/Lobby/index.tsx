@@ -1,33 +1,24 @@
-import { LobbyArea } from './style'
-
+import { LobbyArea, VisitArea } from './style'
+import { visits } from '../../helpers/visits';
 import { Container } from '../../components/MainComponents';
 import { useState } from 'react';
 
 export const Lobby = () => {
     
-    const [disabled, setDisabled] = useState(false);
-    const [name, setName] = useState('');
-    const [doc, setDoc] = useState('');
-    const [phone, setPhone] = useState('');
-    const [arrivalTime, setArrivalTime] = useState('');
+    const [disabled, setDisabled] = useState<boolean>(false);
+    const [name, setName] = useState<String>('');
+    const [doc, setDoc] = useState<String>('');
+    const [phone, setPhone] = useState<String>('');
+    const [arrivalTime, setArrivalTime] = useState<String>('');
+    const [exitTime, setExitTime] = useState<String>('');
+    const [sector, setSector] = useState<String>('');
+    const [doorman, setDoorman] = useState<String>('');
+    const [obs, setObs] = useState<String>('');
 
-    const setZero = (number: number) => {
-        if(number < 0) {
-            return `0${number}`;
-        }
+    const handleSubmit = () => {
+        alert('pegou');
+        
     }
-
-    const formatDate = () => {
-        let cDate = new Date();
-
-        let months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-        let cDay = cDate.getDate();
-        let cMonth = cDate.getMonth();
-        let cYear = cDate.getFullYear();
-
-        return `${cDay} de ${months[cMonth]} de ${cYear}`;
-    }
-
     return(
         <Container>
             <LobbyArea>
@@ -38,19 +29,19 @@ export const Lobby = () => {
                             <input
                                 type="text"
                                 disabled={disabled}
-                                value={name}
+                                value={name.toString()}
                                 onChange={e => setName(e.target.value)}
                                 required
                             />
                         </div>
                     </label>
                     <label className="area">
-                        <div className="area--title">Doocumento<br />de Identificação:</div>
+                        <div className="area--title">Documento de Identificação:</div>
                         <div className="area--input">
                             <input
                                 type="text"
                                 disabled={disabled}
-                                value={doc}
+                                value={doc.toString()}
                                 onChange={e => setDoc(e.target.value)}
                                 required
                             />
@@ -62,7 +53,7 @@ export const Lobby = () => {
                             <input
                                 type="text"
                                 disabled={disabled}
-                                value={phone}
+                                value={phone.toString()}
                                 onChange={e => setPhone(e.target.value)}
                                 required
                             />
@@ -73,13 +64,121 @@ export const Lobby = () => {
                         <div className="area--input">
                         <input
                                 type="date"
-                                disabled={!disabled}
-                                value={arrivalTime}
+                                disabled={disabled}
+                                value={arrivalTime.toString()}
+                                onChange={e => setArrivalTime(e.target.value)}
                                 required
                             />
                         </div>
                     </label>
+                    <label className="area">
+                        <div className="area--title">Hora Saída:</div>
+                        <div className="area--input">
+                        <input
+                                type="date"
+                                disabled={disabled}
+                                value={exitTime.toString()}
+                                required
+                            />
+                        </div>
+                    </label>
+                    <label className="area">
+                        <div className="area--title">Setor de Destino:</div>
+                        <div className="area--input">
+                        <input
+                                type="text"
+                                disabled={disabled}
+                                value={sector.toString()}
+                                required
+                            />
+                        </div>
+                    </label>
+                    <label className="area">
+                        <div className="area--title">Porteiro Responsavel:</div>
+                        <div className="area--input">
+                        <input
+                                type="text"
+                                disabled={disabled}
+                                value={doorman.toString()}
+                                required
+                            />
+                        </div>
+                    </label>
+                    <label className="area">
+                        <div className="area--title">Observações:</div>
+                        <div className="area--input">
+                            <input
+                                type="text"
+                                disabled={disabled}
+                                value={obs.toString()}
+                                required
+                            />
+                        </div>
+                    </label>
+                    <label className="area">
+                        <div className="area--title"></div>
+                        <div className="area--input">
+                            <button disabled={disabled} onClick={handleSubmit}>Cadastrar Visitante</button>
+                        </div>
+                    </label>
                 </form>
+                <VisitArea>
+                    <table>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Documento de Identificação</th>
+                            <th>Telefone</th>
+                            <th>Hora Entrada</th>
+                            <th>Hora Saída</th>
+                            <th>Setor de Destino</th>
+                            <th>Porteiro Responsavel</th>
+                            <th>Observações</th>
+                        </tr>
+
+                        <tr>
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.name}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.doc}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.phone}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.arrivalTime}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.exitTime}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.sector}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.doorman}
+                                </td>
+                            ))}
+                            {visits.map((item, index) => (
+                                <td className="itemVisit" key={index}>
+                                    {item.obs}
+                                </td>
+                            ))}
+                        </tr>
+                    </table>
+                </VisitArea>
             </LobbyArea>
         </Container>
     );
