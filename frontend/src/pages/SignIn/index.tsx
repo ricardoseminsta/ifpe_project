@@ -2,9 +2,11 @@ import * as C from './style'
 import { useContext, useState } from 'react';
 import { Context } from '../../contexts/Context'
 import { Container } from '../../components/MainComponents';
+import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
-    
+
+    const navigate = useNavigate();
     const {state, dispatch} = useContext(Context);
     
     const [user, setUser] = useState(state.user.name);
@@ -19,7 +21,7 @@ export const SignIn = () => {
             dispatch({
                 type: 'CHANGE_AUTH',
                 payload: {
-                    logged: logged
+                    logged: true
                 }
             });
             dispatch({
@@ -28,10 +30,10 @@ export const SignIn = () => {
                     name: user
                 }
             });
-            
+            navigate('/')
             
         } else {
-            document.location.href = '/';
+            document.location.href = '/signin';
         }
     }
     console.log(state.user.logged);
@@ -69,7 +71,9 @@ export const SignIn = () => {
                             <button disabled={disabled} onClick={handleSubmit}>Fazer Login</button>
                         </div>
                     </label>
-                    User: {state.user.name}
+                    User: {state.user.name}<br/>
+                    Logado: {state.user.logged.toString()}<br/>
+                    idade: {state.user.age}
                 </form>
             </C.SignIn>
         </Container>

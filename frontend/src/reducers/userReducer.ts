@@ -6,7 +6,7 @@ export type UserType = {
 }
 
 export const userInitialState: UserType = {
-    name: 'teste',
+    name: '',
     age: 0,
     logged: false
 }

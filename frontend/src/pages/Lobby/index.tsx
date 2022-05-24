@@ -1,10 +1,15 @@
 import { LobbyArea, VisitArea } from './style'
-import { visits } from '../../helpers/visits';
+import { visits, VisitsType } from '../../helpers/visits';
 import { Container } from '../../components/MainComponents';
-import { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { Context } from '../../contexts/Context'
+import { useNavigate } from 'react-router-dom';
 
 export const Lobby = () => {
     
+    const navigate = useNavigate();
+    const {state, dispatch} = useContext(Context);
+
     const [disabled, setDisabled] = useState<boolean>(false);
     const [name, setName] = useState<String>('');
     const [doc, setDoc] = useState<String>('');
@@ -14,14 +19,25 @@ export const Lobby = () => {
     const [sector, setSector] = useState<String>('');
     const [doorman, setDoorman] = useState<String>('');
     const [obs, setObs] = useState<String>('');
+    const [addVisit, setAddVisit] = useState<VisitsType[]>([]);
+    
 
-    const handleSubmit = () => {
-        alert('pegou');
-        
+    const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        let visitForm: VisitsType  = {name , doc, phone, arrivalTime, exitTime, sector, doorman, obs};
+        visits.push(visitForm);
+        navigate('/lobby');
     }
+
+    useEffect(()=>{
+    }, [visits]);
+
     return(
         <Container>
             <LobbyArea>
+                    User: {state.user.name}<br/>
+                    Logado: {state.user.logged.toString()}<br/>
+                    idade: {state.user.age}
                 <form >
                 <label className="area">
                         <div className="area--title">Nome:</div>
@@ -77,6 +93,7 @@ export const Lobby = () => {
                         <input
                                 type="date"
                                 disabled={disabled}
+                                onChange={e => setExitTime(e.target.value)}
                                 value={exitTime.toString()}
                                 required
                             />
@@ -88,6 +105,7 @@ export const Lobby = () => {
                         <input
                                 type="text"
                                 disabled={disabled}
+                                onChange={e => setSector(e.target.value)}
                                 value={sector.toString()}
                                 required
                             />
@@ -99,6 +117,7 @@ export const Lobby = () => {
                         <input
                                 type="text"
                                 disabled={disabled}
+                                onChange={e => setDoorman(e.target.value)}
                                 value={doorman.toString()}
                                 required
                             />
@@ -110,6 +129,7 @@ export const Lobby = () => {
                             <input
                                 type="text"
                                 disabled={disabled}
+                                onChange={e => setObs(e.target.value)}
                                 value={obs.toString()}
                                 required
                             />

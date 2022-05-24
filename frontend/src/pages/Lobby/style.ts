@@ -64,8 +64,11 @@ form {
 
 export const VisitArea = styled.div`
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
     
     table {
+        font-size:12px;
         box-shadow: 0px 0px 3px #999;
         border-radius: 5px;
     }
