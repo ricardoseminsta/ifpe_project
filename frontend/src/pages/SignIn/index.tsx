@@ -12,7 +12,9 @@ export const SignIn = () => {
     const [password, setPassword] = useState('');
     const [disabled, setDisable] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
         if(user === 'ricar' && password === '1234'){
             dispatch({
                 type: 'CHANGE_AUTH',

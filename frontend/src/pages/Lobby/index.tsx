@@ -134,49 +134,19 @@ export const Lobby = () => {
                             <th>Porteiro Responsavel</th>
                             <th>Observações</th>
                         </tr>
+                        {visits.map((item, index) => (
+                            <tr className="itemVisit" key={index}>
+                                <td>{item.name}</td>
+                                <td>{item.doc}</td>
+                                <td>{item.phone}</td>
+                                <td>{item.arrivalTime}</td>
+                                <td>{item.exitTime}</td>
+                                <td>{item.sector}</td>
+                                <td>{item.doorman}</td>
+                                <td>{item.obs}</td>
+                            </tr>
+                        ))}
 
-                        <tr>
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.name}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.doc}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.phone}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.arrivalTime}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.exitTime}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.sector}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.doorman}
-                                </td>
-                            ))}
-                            {visits.map((item, index) => (
-                                <td className="itemVisit" key={index}>
-                                    {item.obs}
-                                </td>
-                            ))}
-                        </tr>
                     </table>
                 </VisitArea>
             </LobbyArea>
