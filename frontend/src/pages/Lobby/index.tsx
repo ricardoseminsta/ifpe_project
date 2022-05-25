@@ -4,11 +4,13 @@ import { Container } from '../../components/MainComponents';
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../contexts/Context'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const Lobby = () => {
     
     const navigate = useNavigate();
     const {state, dispatch} = useContext(Context);
+    let tpmVitists: VisitsType[] = [...visits]
 
     const [disabled, setDisabled] = useState<boolean>(false);
     const [name, setName] = useState<String>('');
@@ -19,18 +21,33 @@ export const Lobby = () => {
     const [sector, setSector] = useState<String>('');
     const [doorman, setDoorman] = useState<String>('');
     const [obs, setObs] = useState<String>('');
-    const [addVisit, setAddVisit] = useState<VisitsType[]>([]);
+    const [listVisits, setListVisits] = useState<String[]>([]);
     
 
     const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let visitForm: VisitsType  = {name , doc, phone, arrivalTime, exitTime, sector, doorman, obs};
         visits.push(visitForm);
-        navigate('/lobby');
+        axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', visitForm)
+       // .then(response => {console.log(response.data);})
+        //navigate('/lobby');
+       
     }
 
+    const getVisits = async () => {
+        let res = await axios.get('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87');
+
+        for (let i = 0; i < res.data.length; i++) {
+            setListVisits(res.data[i]);
+        }
+        console.log(listVisits);
+        
+        
+    }
+    
     useEffect(()=>{
-    }, [visits]);
+
+    }, [tpmVitists]);
 
     return(
         <Container>
@@ -144,29 +161,33 @@ export const Lobby = () => {
                 </form>
                 <VisitArea>
                     <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Documento de Identificação</th>
-                            <th>Telefone</th>
-                            <th>Hora Entrada</th>
-                            <th>Hora Saída</th>
-                            <th>Setor de Destino</th>
-                            <th>Porteiro Responsavel</th>
-                            <th>Observações</th>
-                        </tr>
-                        {visits.map((item, index) => (
-                            <tr className="itemVisit" key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.doc}</td>
-                                <td>{item.phone}</td>
-                                <td>{item.arrivalTime}</td>
-                                <td>{item.exitTime}</td>
-                                <td>{item.sector}</td>
-                                <td>{item.doorman}</td>
-                                <td>{item.obs}</td>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Documento de Identificação</th>
+                                <th>Telefone</th>
+                                <th>Hora Entrada</th>
+                                <th>Hora Saída</th>
+                                <th>Setor de Destino</th>
+                                <th>Porteiro Responsavel</th>
+                                <th>Observações</th>
                             </tr>
-                        ))}
+                        </thead>
+                        <tbody>
+                            {tpmVitists.map((item, index) => (
+                                <tr className="itemVisit" key={index}>
+                                    <td>{item.name}</td>
+                                    <td>{item.doc}</td>
+                                    <td>{item.phone}</td>
+                                    <td>{item.arrivalTime}</td>
+                                    <td>{item.exitTime}</td>
+                                    <td>{item.sector}</td>
+                                    <td>{item.doorman}</td>
+                                    <td>{item.obs}</td>
+                                </tr>
 
+                            ))}
+                        </tbody>
                     </table>
                 </VisitArea>
             </LobbyArea>

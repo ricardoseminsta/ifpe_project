@@ -63,7 +63,7 @@ form {
 `;
 
 export const VisitArea = styled.div`
-    margin-top: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     
