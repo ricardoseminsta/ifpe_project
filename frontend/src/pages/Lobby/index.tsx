@@ -19,16 +19,26 @@ export const Lobby = () => {
     const [obs, setObs] = useState<String>('');
     const [listVisits, setListVisits] = useState<VisitsType[]>([]);
     
+    const resetInput = () => {
+        setName('');
+        setDoc('');
+        setPhone('');
+        setArrivalTime('');
+        setExitTime('');
+        setSector('');
+        setDoorman('');
+        setObs('');
+    }
+
     const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let tpmVitists: VisitsType  = {name , doc, phone, arrivalTime, exitTime, sector, doorman, obs};
-        
-        //let tpmVitists: VisitsType[] = [...visits]
         visits.push(tpmVitists);
         let copyVisits = [...visits];
         setListVisits(copyVisits);
-        //axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', visitForm)
-        // .then(response => {console.log(response.data);})
+        //axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', tpmVitists);
+        //.then(response => {console.log(response.data);})
+        resetInput();
        
     }
 
@@ -44,7 +54,8 @@ export const Lobby = () => {
     }
     
     useEffect(()=>{
-       setListVisits(visits);
+        getVisits();
+        setListVisits(visits);
     }, []);
 
     return(
@@ -158,6 +169,7 @@ export const Lobby = () => {
                     </label>
                 </form>
                 <VisitArea>
+                    {listVisits.length > 0 &&
                     <table>
                         <thead>
                             <tr>
@@ -187,6 +199,7 @@ export const Lobby = () => {
                             ))}
                         </tbody>
                     </table>
+                    }
                 </VisitArea>
             </LobbyArea>
         </Container>
