@@ -10,18 +10,10 @@ export const Header = () => {
         <Container>
             <C.Header>
                 <C.Logo>
-                {state.user.logged === true &&
                     <Link to="/">
                         <span>IF</span>
                         <p>CAFI</p>
                     </Link>
-                }
-                 {state.user.logged === false &&
-                    <Link to="/signin">
-                        <span>IF</span>
-                        <p>CAFI</p>
-                    </Link>
-                }
                 </C.Logo>
                 <C.Nav>
                     {state.user.logged === true &&

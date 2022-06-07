@@ -36,7 +36,7 @@ export const Lobby = () => {
         visits.push(tpmVitists);
         let copyVisits = [...visits];
         setListVisits(copyVisits);
-        //axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', tpmVitists);
+        axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', tpmVitists);
         //.then(response => {console.log(response.data);})
         resetInput();
        
@@ -54,7 +54,7 @@ export const Lobby = () => {
     }
     
     useEffect(()=>{
-        getVisits();
+        //getVisits();
         setListVisits(visits);
     }, []);
 
@@ -105,7 +105,7 @@ export const Lobby = () => {
                         <div className="area--title">Hora Entrada:</div>
                         <div className="area--input">
                         <input
-                                type="date"
+                                type="time"
                                 disabled={disabled}
                                 value={arrivalTime.toString()}
                                 onChange={e => setArrivalTime(e.target.value)}
@@ -117,7 +117,7 @@ export const Lobby = () => {
                         <div className="area--title">Hora Saída:</div>
                         <div className="area--input">
                         <input
-                                type="date"
+                                type="time"
                                 disabled={disabled}
                                 onChange={e => setExitTime(e.target.value)}
                                 value={exitTime.toString()}
