@@ -2,6 +2,7 @@ import { LobbyArea, VisitArea } from './style'
 import { visits, VisitsType } from '../../helpers/visits';
 import { Container } from '../../components/MainComponents';
 import React, { useContext, useState, useEffect } from 'react';
+import Select from 'react-select' 
 import { Context } from '../../contexts/Context'
 import axios from "axios";
 
@@ -52,7 +53,19 @@ export const Lobby = () => {
         }
 
     }
+
+    const sectors = [
+        {value:"dap", label:"DAP"},
+        {value:"cad", label:"CAD"},
+        {value:"dg", label:"DIREÇÃO GERAL"},
+        {value:"cgti", label:"CGTI"}
+    ]
     
+    const doormens = [
+        {value:"inacia", label:"INÁCIA"},
+        {value:"laudimarks", label:"LAUDIMARKS"}
+    ]
+
     useEffect(()=>{
         //getVisits();
         setListVisits(visits);
@@ -128,25 +141,13 @@ export const Lobby = () => {
                     <label className="area">
                         <div className="area--title">Setor de Destino:</div>
                         <div className="area--input">
-                        <input
-                                type="text"
-                                disabled={disabled}
-                                onChange={e => setSector(e.target.value)}
-                                value={sector.toString()}
-                                required
-                            />
+                        <Select options={sectors}/>
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title">Porteiro Responsavel:</div>
                         <div className="area--input">
-                        <input
-                                type="text"
-                                disabled={disabled}
-                                onChange={e => setDoorman(e.target.value)}
-                                value={doorman.toString()}
-                                required
-                            />
+                        <Select options={doormens} />
                         </div>
                     </label>
                     <label className="area">
