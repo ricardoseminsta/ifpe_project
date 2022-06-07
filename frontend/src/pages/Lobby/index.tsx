@@ -36,7 +36,7 @@ export const Lobby = () => {
         visits.push(tpmVitists);
         let copyVisits = [...visits];
         setListVisits(copyVisits);
-        axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', tpmVitists);
+        //axios.post('https://sheet.best/api/sheets/817ff436-dbaa-4ebb-999f-efe65d82ad87', tpmVitists);
         //.then(response => {console.log(response.data);})
         resetInput();
        
